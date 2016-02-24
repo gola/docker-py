@@ -477,7 +477,7 @@ def create_host_config(
     ipc_mode=None, security_opt=None, ulimits=None, log_config=None,
     mem_limit=None, memswap_limit=None, mem_swappiness=None,
     cgroup_parent=None, group_add=None, cpu_quota=None, cpu_period=None,
-    oom_kill_disable=False, version=None
+    oom_kill_disable=False, version=None, cpu_shares=None, cpuset=None
 ):
 
     host_config = {}
@@ -665,6 +665,11 @@ def create_host_config(
                 'cpu_period param not supported for API version < 1.19'
             )
         host_config['CpuPeriod'] = cpu_period
+
+    if cpu_shares:
+        host_config['CpuShares'] = cpu_shares
+    if cpuset:
+        host_config['CpusetCpus'] = cpuset
 
     return host_config
 
